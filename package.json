@@ -1,0 +1,29 @@
+{
+  "name": "splity-api",
+  "version": "0.1.0",
+  "private": true,
+  "homepage": "http://splity.github.io/splity/",
+  "scripts": {
+    "lint": "eslint --fix src/*",
+    "build": "netlify-lambda build src/functions",
+    "start": "netlify-lambda serve src/functions",
+    "postinstall": "netlify-lambda install"
+  },
+  "dependencies": {
+    "apollo-server-lambda": "^2.9.9",
+    "graphql": "^14.5.8",
+    "mongoose": "^5.7.11"
+  },
+  "devDependencies": {
+    "babel-eslint": "^10.0.3",
+    "eslint": "^6.6.0",
+    "eslint-config-airbnb": "^18.0.1",
+    "eslint-config-prettier": "^6.5.0",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-prettier": "^3.1.1",
+    "eslint-plugin-react": "^7.16.0",
+    "netlify-lambda": "^1.6.3",
+    "prettier": "^1.19.1"
+  }
+}
