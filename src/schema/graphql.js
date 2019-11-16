@@ -19,4 +19,9 @@ export default gql`
     shoppingList(id: ID!): ShoppingList
     item(id: ID!): Item
   }
+
+  type Mutation {
+    createItem(name: String, shoppingList: ID!): Item
+    createShoppingList(name: String): ShoppingList
+  }
 `;
