@@ -1,27 +1,18 @@
-const {
-  ApolloServer,
-  gql
-} = require("apollo-server-lambda");
+import { ApolloServer } from 'apollo-server-lambda';
+import { applyMiddleware } from 'graphql-middleware';
+import { makeExecutableSchema } from 'graphql-tools';
 
-const typeDefs = gql `
-  type Query {
-    hello: String
-  }
-`;
+import resolvers from '../resolvers';
+import typeDefs from '../schema/graphql';
+import dbConnectionMiddleware from '../middleware/dbConnectionMiddleware';
 
-const resolvers = {
-  Query: {
-    hello: (root, args, context) => {
-      return "Hello, world!";
-    }
-  }
-};
+const schema = makeExecutableSchema({ typeDefs, resolvers });
+
+const schemaWithMiddleware = applyMiddleware(schema, dbConnectionMiddleware);
 
 const server = new ApolloServer({
-  typeDefs,
-  resolvers,
+  schema: schemaWithMiddleware,
   introspection: true,
-  playground: true
 });
 
 exports.handler = server.createHandler();
